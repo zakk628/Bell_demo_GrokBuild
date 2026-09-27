@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://j78dup2jypem"]
+
+[ext_resource type="Script" uid="uid://voboxd1r235u" path="res://GDScript/Character/test_unit.gd" id="1_unit"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ywgyq"]
+radius = 0.75
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_xf8cf"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_1mycs"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ogco0"]
+albedo_color = Color(0.3019608, 1, 1, 1)
+
+[node name="test_unit" type="CharacterBody3D" unique_id=1749964988]
+transform = Transform3D(0.9998766, 0, 0.015707318, 0, 1, 0, -0.015707318, 0, 0.9998766, 0, 0, 0)
+script = ExtResource("1_unit")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=887530954]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9918647, 0)
+shape = SubResource("CapsuleShape3D_ywgyq")
+
+[node name="torso" type="MeshInstance3D" parent="." unique_id=1586762293]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_xf8cf")
+
+[node name="eye" type="MeshInstance3D" parent="." unique_id=1222502781]
+transform = Transform3D(0.75, 0, 0, 0, 0.25, 0, 0, 0, 0.4, 0, 1.4919178, 0.38831615)
+mesh = SubResource("BoxMesh_1mycs")
+
+[node name="body" type="MeshInstance3D" parent="." unique_id=1877645294]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.25, 0, 0.90133405, 0.38831615)
+mesh = SubResource("BoxMesh_1mycs")
+surface_material_override/0 = SubResource("StandardMaterial3D_ogco0")

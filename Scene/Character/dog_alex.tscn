@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://da2shie1q1wm3"]
+
+[ext_resource type="PackedScene" uid="uid://bibktj472awe5" path="res://Scene/Character/dog_alex_base.tscn" id="1_rf8u2"]
+[ext_resource type="Script" uid="uid://dg03uhdj6hhmv" path="res://GDScript/Character/dog_alex.gd" id="2_alex"]
+[ext_resource type="Script" uid="uid://cyx3n35l7iavp" path="res://GDScript/Character/locomotion_anim.gd" id="3_loco"]
+[ext_resource type="Script" uid="uid://llg7r8iff6ui" path="res://GDScript/Character/action_controller.gd" id="4_act"]
+[ext_resource type="Script" path="res://GDScript/Character/scan_controller.gd" id="5_scan"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3klvo"]
+size = Vector3(2, 4, 5)
+
+[node name="dog_alex" type="CharacterBody3D" unique_id=1683209032]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+script = ExtResource("2_alex")
+
+[node name="dog_alex_base" parent="." unique_id=834532284 instance=ExtResource("1_rf8u2")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=67684639]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("BoxShape3D_3klvo")
+
+[node name="CameraRig" type="Node3D" parent="." unique_id=2029923175]
+
+[node name="Camera3D" type="Camera3D" parent="CameraRig" unique_id=1420950457]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 20, 15)
+current = true
+fov = 55.0
+
+[node name="LocomotionAnim" type="Node" parent="." unique_id=2045638055]
+script = ExtResource("3_loco")
+
+[node name="ActionController" type="Node" parent="." unique_id=2080808388]
+script = ExtResource("4_act")
+
+[node name="ScanController" type="Node" parent="." unique_id=1385436521]
+script = ExtResource("5_scan")
+
+[node name="InteractController" type="Node" parent="." unique_id=1779961690]

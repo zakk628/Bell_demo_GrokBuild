@@ -1,0 +1,139 @@
+[gd_scene format=3 uid="uid://b7yardtest001"]
+
+[ext_resource type="PackedScene" uid="uid://da2shie1q1wm3" path="res://Scene/Character/dog_alex.tscn" id="1_dog"]
+[ext_resource type="PackedScene" uid="uid://j78dup2jypem" path="res://Scene/Character/test_unit.tscn" id="2_3ii01"]
+[ext_resource type="PackedScene" uid="uid://ccheckpoint8" path="res://Scene/Scene/checkpoint.tscn" id="3_cp"]
+
+[sub_resource type="Environment" id="Environment_yard"]
+background_mode = 1
+background_color = Color(0.62, 0.72, 0.82, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.74, 0.76, 0.78, 1)
+ambient_light_energy = 0.7
+
+[sub_resource type="Shader" id="Shader_grid"]
+code = "shader_type spatial;
+uniform vec3 base_color : source_color = vec3(0.04, 0.10, 0.24);
+uniform vec3 line_color : source_color = vec3(0.32, 0.58, 0.95);
+void fragment() {
+	vec3 world = (INV_VIEW_MATRIX * vec4(VERTEX, 1.0)).xyz;
+	vec2 cell = fract(world.xz);
+	float line = max(step(0.96, cell.x), step(0.96, cell.y));
+	ALBEDO = mix(base_color, line_color, line);
+	ROUGHNESS = 1.0;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_grid"]
+render_priority = 0
+shader = SubResource("Shader_grid")
+shader_parameter/base_color = Color(0.04, 0.1, 0.24, 1)
+shader_parameter/line_color = Color(0.32, 0.58, 0.95, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_floor"]
+size = Vector3(40, 1, 40)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
+size = Vector3(40, 1, 40)
+
+[node name="TestYard" type="Node3D" unique_id=985845954]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=648596660]
+environment = SubResource("Environment_yard")
+
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=763258502]
+transform = Transform3D(0.8660254, -0.40957603, 0.28678823, 0, 0.57357645, 0.81915206, -0.5, -0.7094065, 0.49673176, 0, 0, 0)
+light_energy = 1.15
+shadow_enabled = true
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=2064264156 groups=["ground"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="Floor" unique_id=1247634257]
+material_override = SubResource("ShaderMaterial_grid")
+mesh = SubResource("BoxMesh_floor")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=1830028621]
+shape = SubResource("BoxShape3D_floor")
+
+[node name="dog_alex" parent="." unique_id=1408578682 instance=ExtResource("1_dog")]
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=2020766338]
+
+[node name="Selection" type="Label" parent="HUD" unique_id=1427496854 groups=["selection_label"]]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = -176.0
+offset_right = -40.0
+offset_bottom = -88.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+
+[node name="Bar" type="HBoxContainer" parent="HUD" unique_id=557238846]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -80.0
+offset_right = -24.0
+offset_bottom = -16.0
+grow_vertical = 0
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Q" type="Button" parent="HUD/Bar" unique_id=320579833]
+custom_minimum_size = Vector2(105, 40)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 18
+text = "Q 鈴鐺"
+
+[node name="Call" type="Button" parent="HUD/Bar" unique_id=1682879154]
+custom_minimum_size = Vector2(150, 56)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "1 呼叫"
+
+[node name="Nuzzle" type="Button" parent="HUD/Bar" unique_id=741814400]
+custom_minimum_size = Vector2(150, 56)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "2 磨蹭"
+
+[node name="Bark" type="Button" parent="HUD/Bar" unique_id=1092572576]
+custom_minimum_size = Vector2(150, 56)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "3 吠叫"
+
+[node name="Bite" type="Button" parent="HUD/Bar" unique_id=1412657084]
+custom_minimum_size = Vector2(150, 56)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "4 撕咬"
+
+[node name="E" type="Button" parent="HUD/Bar" unique_id=193850558]
+custom_minimum_size = Vector2(105, 40)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 18
+text = "E 互動"
+
+[node name="test_unit" parent="." unique_id=1749964988 instance=ExtResource("2_3ii01")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12347317, -1.9073486e-06, -6.720727)
+
+[node name="yard_01" parent="." unique_id=904975161 instance=ExtResource("3_cp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.5, 0)
+checkpoint_id = "yard_01"
+
+[connection signal="pressed" from="HUD/Bar/Q" to="dog_alex/ActionController" method="request" binds= ["Q"]]
+[connection signal="pressed" from="HUD/Bar/Call" to="dog_alex/ActionController" method="request" binds= [1]]
+[connection signal="pressed" from="HUD/Bar/Nuzzle" to="dog_alex/ActionController" method="request" binds= [2]]
+[connection signal="pressed" from="HUD/Bar/Bark" to="dog_alex/ActionController" method="request" binds= [3]]
+[connection signal="pressed" from="HUD/Bar/Bite" to="dog_alex/ActionController" method="request" binds= [4]]
+[connection signal="pressed" from="HUD/Bar/E" to="dog_alex/ActionController" method="request" binds= ["E"]]

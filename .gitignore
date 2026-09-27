@@ -1,0 +1,11 @@
+.godot/
+.import/
+*.translation
+export.cfg
+export_presets.cfg
+*.apk
+*.aab
+*.zip
+*.exe
+.DS_Store
+Thumbs.db
