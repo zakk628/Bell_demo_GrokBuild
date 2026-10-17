@@ -158,15 +158,29 @@ func _followers() -> Array[Node3D]:
 
 func _dim_shader() -> Shader:
 	var shader := Shader.new()
+	# 經過格：薄霧。保留畫面顏色，只壓對比並加一點地面噪點。
 	shader.code = "shader_type spatial;
-render_mode unshaded, cull_disabled, depth_draw_never, shadows_disabled, ambient_light_disabled;
+render_mode unshaded, cull_disabled, depth_draw_never, shadows_disabled, ambient_light_disabled, blend_mix;
 uniform sampler2D screen_texture : hint_screen_texture, filter_linear;
+
+float fog_hash(vec2 p) {
+	return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+}
+
 void fragment() {
 	vec3 screen = texture(screen_texture, SCREEN_UV).rgb;
 	float luma = dot(screen, vec3(0.299, 0.587, 0.114));
-	vec3 gray = vec3(luma);
-	ALBEDO = mix(gray, vec3(0.05, 0.045, 0.04), 0.35) * 0.42;
-	ALPHA = 1.0;
+	vec3 washed = mix(screen, vec3(luma), 0.35);
+	vec3 fog = vec3(0.68, 0.72, 0.76);
+	vec3 soft = mix(fog, washed, 0.62);
+	soft = mix(vec3(0.58, 0.60, 0.63), soft, 0.78);
+	vec2 ground = (INV_VIEW_MATRIX * vec4(VERTEX, 1.0)).xz;
+	float coarse = fog_hash(floor(ground * 5.0));
+	float fine = fog_hash(floor(ground * 14.0) + vec2(19.0, 7.0));
+	float grain = coarse * 0.65 + fine * 0.35 - 0.5;
+	soft += grain * 0.055;
+	ALBEDO = soft;
+	ALPHA = clamp(0.58 + grain * 0.08, 0.46, 0.70);
 }
 "
 	return shader
