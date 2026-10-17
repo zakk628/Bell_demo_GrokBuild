@@ -1,9 +1,0 @@
-[gd_scene format=3]
-
-[ext_resource type="PackedScene" uid="uid://dw57eix7okg1j" path="res://Scene/Character/standardman_panties.tscn" id="1_body"]
-[ext_resource type="Script" uid="uid://voboxd1r235u" path="res://GDScript/Character/test_unit.gd" id="2_unit"]
-
-[node name="Adam" type="CharacterBody3D"]
-script = ExtResource("2_unit")
-
-[node name="standardman_panties" parent="." instance=ExtResource("1_body")]
