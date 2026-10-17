@@ -8,6 +8,8 @@ const INNER_MIN := -8
 const INNER_MAX := 7
 const CENTER_CELL := Vector2i(-1, -1)
 const FOLLOWER_CELL := Vector2i(3, -1)
+const JOHN_CELL := Vector2i(-1, 2)
+const ADAM_CELL := Vector2i(2, -1)
 const WALL_BELOW := 0.4
 const WALL_TEXTURE := "res://Assets/Floor/export_floor_a_floor_A.jpg"
 
@@ -193,7 +195,7 @@ func _place_actors() -> void:
 	var dog := get_node_or_null("dog_alex") as Node3D
 	if dog != null:
 		var spawn := cell_center(CENTER_CELL)
-		dog.position = Vector3(spawn.x, walk_surface_y + 0.2, spawn.z)
+		dog.position = Vector3(spawn.x, walk_surface_y, spawn.z)
 	var unit := get_node_or_null("test_unit") as Node3D
 	if unit != null:
 		var spot := cell_center(FOLLOWER_CELL)
@@ -202,3 +204,13 @@ func _place_actors() -> void:
 	if marker != null:
 		var mark_at := cell_center(Vector2i(0, 0))
 		marker.position = Vector3(mark_at.x, walk_surface_y + 0.5, mark_at.z)
+	_place_on_floor("John", JOHN_CELL)
+	_place_on_floor("Adam", ADAM_CELL)
+
+
+func _place_on_floor(node_name: String, cell: Vector2i) -> void:
+	var actor := get_node_or_null(node_name) as Node3D
+	if actor == null:
+		return
+	var spot := cell_center(cell)
+	actor.position = Vector3(spot.x, walk_surface_y, spot.z)

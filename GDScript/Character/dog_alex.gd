@@ -247,9 +247,14 @@ func _show_selection(node: Node) -> void:
 	var label := get_tree().get_first_node_in_group("selection_label") as Label
 	if label == null:
 		return
+	var info_node := node
+	if node != null and not node.has_method("selection_info"):
+		var ai := node.get_node_or_null("FollowAI")
+		if ai != null and ai.has_method("selection_info"):
+			info_node = ai
 	if node == null:
 		label.text = ""
-	elif node.has_method("selection_info"):
-		label.text = node.selection_info()
+	elif info_node != null and info_node.has_method("selection_info"):
+		label.text = info_node.selection_info()
 	else:
 		label.text = "選取：%s" % node.name

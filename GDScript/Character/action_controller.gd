@@ -61,26 +61,30 @@ func request(action_id: Variant) -> void:
 		return
 	if token == "E":
 		for node in get_tree().get_nodes_in_group("unit"):
-			if node.has_method("try_interact"):
-				node.try_interact()
+			var api := _unit_api(node)
+			if api != null and api.has_method("try_interact"):
+				api.try_interact()
 		return
-	if _busy:
-		return
-	var clip: String = str(_CLIPS.get(int(action_id), ""))
+	var action := int(action_id)
+	var clip: String = str(_CLIPS.get(action, ""))
 	if clip == "":
 		return
-	if not _player.has_animation(clip):
-		print("ActionController: 沒有 %s（%s），略過" % [clip, _LABELS.get(action_id, "")])
+	if action == 1:
+		_hit_units(2)
+		_notify_called()
+	elif action == 3:
+		_hit_units(-2)
+	var has_clip := _player.has_animation(clip)
+	if not has_clip:
+		print("ActionController: 沒有 %s（%s），略過動畫" % [clip, _LABELS.get(action, "")])
+		return
+	if _busy:
 		return
 	_busy = true
 	_playing = clip
 	_loco.set_busy(true)
 	_player.speed_scale = 1.0
 	_player.play(clip, 0.08, 1.0)
-	if int(action_id) == 1:
-		_hit_units(2)
-	elif int(action_id) == 3:
-		_hit_units(-2)
 
 
 func _hit_units(amount: int) -> void:
@@ -88,13 +92,43 @@ func _hit_units(amount: int) -> void:
 	if dog == null:
 		return
 	for node in get_tree().get_nodes_in_group("unit"):
-		if node == dog or not node.has_method("apply_friendship"):
+		if node == dog:
 			continue
 		var unit := node as Node3D
+		if unit == null:
+			continue
+		var api := _unit_api(node)
+		if api == null or not api.has_method("apply_friendship"):
+			continue
 		var offset := unit.global_position - dog.global_position
 		offset.y = 0.0
 		if offset.length() <= CALL_BARK_RANGE:
-			unit.apply_friendship(amount)
+			api.apply_friendship(amount)
+
+
+func _notify_called() -> void:
+	var dog := get_parent() as Node3D
+	if dog == null:
+		return
+	for node in get_tree().get_nodes_in_group("unit"):
+		if node == dog:
+			continue
+		var unit := node as Node3D
+		if unit == null:
+			continue
+		var api := _unit_api(node)
+		if api == null or not api.has_method("on_dog_call"):
+			continue
+		var offset := unit.global_position - dog.global_position
+		offset.y = 0.0
+		if offset.length() <= CALL_BARK_RANGE:
+			api.on_dog_call()
+
+
+func _unit_api(node: Node) -> Node:
+	if node.has_method("apply_friendship") or node.has_method("on_dog_call") or node.has_method("try_interact"):
+		return node
+	return node.get_node_or_null("FollowAI")
 
 
 func _on_animation_finished(anim_name: StringName) -> void:

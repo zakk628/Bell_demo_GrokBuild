@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://cadamhuman01"]
+
+[ext_resource type="PackedScene" uid="uid://dw57eix7okg1j" path="res://Scene/Character/standardman_panties.tscn" id="1_man"]
+[ext_resource type="Script" uid="uid://dkmetxemrrn1o" path="res://GDScript/Character/human_locomotion.gd" id="2_loco"]
+[ext_resource type="Script" uid="uid://bwbwemq1anwh" path="res://GDScript/Character/human_follow.gd" id="3_ai"]
+
+[node name="Adam" type="CharacterBody3D" groups=["unit"]]
+
+[node name="standardman_panties" parent="." instance=ExtResource("1_man")]
+
+[node name="LocomotionAnim" type="Node" parent="."]
+script = ExtResource("2_loco")
+
+[node name="FollowAI" type="Node" parent="."]
+script = ExtResource("3_ai")

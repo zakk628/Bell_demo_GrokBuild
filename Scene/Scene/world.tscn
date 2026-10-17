@@ -5,6 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://da2shie1q1wm3" path="res://Scene/Character/dog_alex.tscn" id="3_dog"]
 [ext_resource type="PackedScene" uid="uid://j78dup2jypem" path="res://Scene/Character/test_unit.tscn" id="4_unit"]
 [ext_resource type="PackedScene" uid="uid://ccheckpoint8" path="res://Scene/Scene/checkpoint.tscn" id="5_cp"]
+[ext_resource type="PackedScene" path="res://Scene/Character_NPC/John.tscn" id="6_john"]
+[ext_resource type="PackedScene" path="res://Scene/Character_NPC/Adam.tscn" id="7_adam"]
 
 [sub_resource type="Environment" id="Environment_ruin"]
 background_mode = 1
@@ -31,7 +33,7 @@ cell_size = Vector3(2, 2, 2)
 script = ExtResource("2_fog")
 
 [node name="dog_alex" parent="." instance=ExtResource("3_dog")]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -1, 0.2, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
 
 [node name="test_unit" parent="." instance=ExtResource("4_unit")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.05, -1)
@@ -39,6 +41,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.05, -1)
 [node name="ruin_01" parent="." instance=ExtResource("5_cp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.5, 0.4)
 checkpoint_id = "ruin_01"
+
+[node name="John" parent="." instance=ExtResource("6_john")]
+
+[node name="Adam" parent="." instance=ExtResource("7_adam")]
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
