@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-const YARD_SCENE := "res://Scene/Scene/test_yard.tscn"
+const YARD_SCENE := "res://Scene/Scene/world.tscn"
 const TITLE_SCENE := "res://Scene/Scene/title.tscn"
 
 var _open := false

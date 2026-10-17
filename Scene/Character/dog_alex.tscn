@@ -4,21 +4,21 @@
 [ext_resource type="Script" uid="uid://dg03uhdj6hhmv" path="res://GDScript/Character/dog_alex.gd" id="2_alex"]
 [ext_resource type="Script" uid="uid://cyx3n35l7iavp" path="res://GDScript/Character/locomotion_anim.gd" id="3_loco"]
 [ext_resource type="Script" uid="uid://llg7r8iff6ui" path="res://GDScript/Character/action_controller.gd" id="4_act"]
-[ext_resource type="Script" path="res://GDScript/Character/scan_controller.gd" id="5_scan"]
+[ext_resource type="Script" uid="uid://chc84bld5gxop" path="res://GDScript/Character/scan_controller.gd" id="5_scan"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_3klvo"]
-size = Vector3(2, 4, 5)
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_br5ut"]
+height = 0.4
+radius = 0.3
 
 [node name="dog_alex" type="CharacterBody3D" unique_id=1683209032]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 script = ExtResource("2_alex")
 
 [node name="dog_alex_base" parent="." unique_id=834532284 instance=ExtResource("1_rf8u2")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+transform = Transform3D(-0.1, 0, -1.509958e-08, 0, 0.1, 0, 1.509958e-08, 0, -0.1, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=67684639]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-shape = SubResource("BoxShape3D_3klvo")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+shape = SubResource("CylinderShape3D_br5ut")
 
 [node name="CameraRig" type="Node3D" parent="." unique_id=2029923175]
 

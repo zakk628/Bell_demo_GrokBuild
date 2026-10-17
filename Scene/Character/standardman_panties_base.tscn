@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://dssn54q7o0ul2"]
+
+[ext_resource type="PackedScene" uid="uid://dx28wgsg4uqrg" path="res://Assets/Human/standardman_panties.glb" id="1_nuhwh"]
+
+[node name="standardman_panties" unique_id=1412880778 instance=ExtResource("1_nuhwh")]

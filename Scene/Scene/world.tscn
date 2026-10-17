@@ -1,3 +1,114 @@
-[gd_scene format=3 uid="uid://b0b6aq5jifghh"]
+[gd_scene format=3 uid="uid://c4ruinworld0a"]
 
-[node name="Node3D" type="Node3D" unique_id=247017161]
+[ext_resource type="Script" path="res://GDScript/Scene/ruin_map.gd" id="1_map"]
+[ext_resource type="Script" path="res://GDScript/Scene/cell_fog.gd" id="2_fog"]
+[ext_resource type="PackedScene" uid="uid://da2shie1q1wm3" path="res://Scene/Character/dog_alex.tscn" id="3_dog"]
+[ext_resource type="PackedScene" uid="uid://j78dup2jypem" path="res://Scene/Character/test_unit.tscn" id="4_unit"]
+[ext_resource type="PackedScene" uid="uid://ccheckpoint8" path="res://Scene/Scene/checkpoint.tscn" id="5_cp"]
+
+[sub_resource type="Environment" id="Environment_ruin"]
+background_mode = 1
+background_color = Color(0.56, 0.6, 0.64, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.72, 0.72, 0.7, 1)
+ambient_light_energy = 0.85
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_map")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ruin")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.8660254, -0.40957603, 0.28678823, 0, 0.57357645, 0.81915206, -0.5, -0.7094065, 0.49673176, 0, 0, 0)
+light_energy = 1.15
+shadow_enabled = true
+
+[node name="Floor" type="GridMap" parent="." groups=["ground"]]
+cell_size = Vector3(2, 2, 2)
+
+[node name="CellFog" type="Node3D" parent="."]
+script = ExtResource("2_fog")
+
+[node name="dog_alex" parent="." instance=ExtResource("3_dog")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -1, 0.2, -1)
+
+[node name="test_unit" parent="." instance=ExtResource("4_unit")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.05, -1)
+
+[node name="ruin_01" parent="." instance=ExtResource("5_cp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.5, 0.4)
+checkpoint_id = "ruin_01"
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Selection" type="Label" parent="HUD" groups=["selection_label"]]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = -176.0
+offset_right = -40.0
+offset_bottom = -88.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+
+[node name="Bar" type="HBoxContainer" parent="HUD"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -80.0
+offset_right = -24.0
+offset_bottom = -16.0
+grow_vertical = 0
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Q" type="Button" parent="HUD/Bar"]
+custom_minimum_size = Vector2(105, 40)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 18
+text = "Q 鈴鐺"
+
+[node name="Call" type="Button" parent="HUD/Bar"]
+custom_minimum_size = Vector2(150, 56)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "1 呼叫"
+
+[node name="Nuzzle" type="Button" parent="HUD/Bar"]
+custom_minimum_size = Vector2(150, 56)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "2 磨蹭"
+
+[node name="Bark" type="Button" parent="HUD/Bar"]
+custom_minimum_size = Vector2(150, 56)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "3 吠叫"
+
+[node name="Bite" type="Button" parent="HUD/Bar"]
+custom_minimum_size = Vector2(150, 56)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "4 撕咬"
+
+[node name="E" type="Button" parent="HUD/Bar"]
+custom_minimum_size = Vector2(105, 40)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 18
+text = "E 互動"
+
+[connection signal="pressed" from="HUD/Bar/Q" to="dog_alex/ActionController" method="request" binds= ["Q"]]
+[connection signal="pressed" from="HUD/Bar/Call" to="dog_alex/ActionController" method="request" binds= [1]]
+[connection signal="pressed" from="HUD/Bar/Nuzzle" to="dog_alex/ActionController" method="request" binds= [2]]
+[connection signal="pressed" from="HUD/Bar/Bark" to="dog_alex/ActionController" method="request" binds= [3]]
+[connection signal="pressed" from="HUD/Bar/Bite" to="dog_alex/ActionController" method="request" binds= [4]]
+[connection signal="pressed" from="HUD/Bar/E" to="dog_alex/ActionController" method="request" binds= ["E"]]

@@ -53,6 +53,10 @@ func mood_name() -> String:
 	return "平穩"
 
 
+func is_following() -> bool:
+	return mood_name() == "親切"
+
+
 func apply_friendship(amount: int) -> void:
 	friendliness = clampi(friendliness + amount, FRIEND_MIN, FRIEND_MAX)
 	_apply_eye()

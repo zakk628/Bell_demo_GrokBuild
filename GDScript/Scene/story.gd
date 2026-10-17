@@ -1,6 +1,6 @@
 extends Control
 
-const YARD_SCENE := "res://Scene/Scene/test_yard.tscn"
+const YARD_SCENE := "res://Scene/Scene/world.tscn"
 
 var _left := false
 
