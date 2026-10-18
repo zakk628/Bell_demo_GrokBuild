@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cb85k3oy60teu"]
+
+[ext_resource type="PackedScene" uid="uid://b123fqmtdxeum" path="res://Scene/Character/standardman_scifi_base.tscn" id="1_ybwkq"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_1k1ps"]
+height = 1.8
+radius = 0.35
+
+[node name="standardman_panties" type="CharacterBody3D" unique_id=1106661385]
+
+[node name="standardman_panties" parent="." unique_id=1412880778 instance=ExtResource("1_ybwkq")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=670754157]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CylinderShape3D_1k1ps")
