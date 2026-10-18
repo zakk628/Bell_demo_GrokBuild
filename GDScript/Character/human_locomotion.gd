@@ -25,8 +25,14 @@ var _idle_left := 0.0
 
 
 func _ready() -> void:
-	var model := get_node("../standardman_panties")
-	_player = model.find_child("AnimationPlayer", true, false) as AnimationPlayer
+	var root := get_parent()
+	if root == null:
+		push_error("LocomotionAnim 的父節點必須是角色根節點")
+		return
+	_player = root.find_child("AnimationPlayer", true, false) as AnimationPlayer
+	if _player == null:
+		push_error("角色根節點底下沒有 AnimationPlayer")
+		return
 	var pool: Array[String] = [IDLE_02, IDLE_03, IDLE_04]
 	initial_idle = pool[randi() % pool.size()]
 	_idle_kind = "initial"

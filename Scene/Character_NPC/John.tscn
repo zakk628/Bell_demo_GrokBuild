@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cjohnhuman01"]
 
-[ext_resource type="PackedScene" uid="uid://dw57eix7okg1j" path="res://Scene/Character/standardman_panties.tscn" id="1_man"]
+[ext_resource type="PackedScene" uid="uid://cb85k3oy60teu" path="res://Scene/Character/standardman_scifi.tscn" id="1_man"]
 [ext_resource type="Script" uid="uid://dkmetxemrrn1o" path="res://GDScript/Character/human_locomotion.gd" id="2_loco"]
 [ext_resource type="Script" uid="uid://bwbwemq1anwh" path="res://GDScript/Character/human_follow.gd" id="3_ai"]
 

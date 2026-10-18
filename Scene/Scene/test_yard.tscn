@@ -130,10 +130,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12347317, -1.9073486e-06, -
 [node name="yard_01" parent="." unique_id=904975161 instance=ExtResource("3_cp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.5, 0)
 checkpoint_id = "yard_01"
-
-[connection signal="pressed" from="HUD/Bar/Q" to="dog_alex/ActionController" method="request" binds= ["Q"]]
-[connection signal="pressed" from="HUD/Bar/Call" to="dog_alex/ActionController" method="request" binds= [1]]
-[connection signal="pressed" from="HUD/Bar/Nuzzle" to="dog_alex/ActionController" method="request" binds= [2]]
-[connection signal="pressed" from="HUD/Bar/Bark" to="dog_alex/ActionController" method="request" binds= [3]]
-[connection signal="pressed" from="HUD/Bar/Bite" to="dog_alex/ActionController" method="request" binds= [4]]
-[connection signal="pressed" from="HUD/Bar/E" to="dog_alex/ActionController" method="request" binds= ["E"]]

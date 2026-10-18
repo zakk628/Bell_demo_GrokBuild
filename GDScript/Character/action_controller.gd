@@ -24,6 +24,7 @@ var _player: AnimationPlayer
 var _loco: Node
 var _busy := false
 var _playing := ""
+var _play_left := 0.0
 var _ring: MeshInstance3D
 var _sector: MeshInstance3D
 var _sector_left := 0.0
@@ -39,6 +40,10 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	if _busy and Engine.time_scale > 0.0:
+		_play_left -= delta
+		if _play_left <= 0.0:
+			_finish_action()
 	var dog := get_parent() as Node3D
 	var selected := _designated_unit(dog) if dog != null else null
 	if _ring != null:
@@ -116,8 +121,12 @@ func _play_clip(clip: String, label: String) -> void:
 		return
 	if _busy:
 		return
+	var anim := _player.get_animation(clip)
+	# 匯入可能把功能動作設成循環，那樣就不會有結束訊號。
+	anim.loop_mode = Animation.LOOP_NONE
 	_busy = true
 	_playing = clip
+	_play_left = anim.length + 0.15
 	_loco.set_busy(true)
 	_player.speed_scale = 1.0
 	_player.play(clip, 0.08, 1.0)
@@ -275,6 +284,13 @@ func _make_sector() -> MeshInstance3D:
 func _on_animation_finished(anim_name: StringName) -> void:
 	if not _busy or str(anim_name) != _playing:
 		return
+	_finish_action()
+
+
+func _finish_action() -> void:
+	if not _busy:
+		return
 	_busy = false
 	_playing = ""
+	_play_left = 0.0
 	_loco.set_busy(false)
