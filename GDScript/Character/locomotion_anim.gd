@@ -7,6 +7,7 @@ enum IdlePhase { PRIMARY, BREAK }
 const IDLE_01 := "alex_move00_idle_01"
 const IDLE_02 := "alex_move00_idle_02"
 const IDLE_03 := "alex_move00_idle_03"
+const IDLE_04 := "alex_move00_idle_04"
 const WALK_ANIM := "alex_move01_walk"
 const RUN_ANIM := "alex_move02_run"
 const SPRINT_ANIM := "alex_move03_sprint"
@@ -15,6 +16,8 @@ const RUN_PLAYBACK := 2.0
 const SPRINT_PLAYBACK := 2.5
 const IDLE_PLAYBACK := 1.0
 const PRIMARY_LAPS := 10
+const _PRIMARY_IDLES: Array[String] = [IDLE_01, IDLE_04]
+const _BREAK_IDLES: Array[String] = [IDLE_02, IDLE_03]
 
 var _player: AnimationPlayer
 var _state: MoveState = MoveState.IDLE
@@ -22,6 +25,7 @@ var _busy := false
 var _phase: IdlePhase = IdlePhase.PRIMARY
 var _primary_clip := IDLE_01
 var _primary_done := 0
+var _break_clip := IDLE_02
 var _break_target := 1
 var _break_done := 0
 var _prev_pos := 0.0
@@ -63,7 +67,7 @@ func _process(_delta: float) -> void:
 	if _player == null or _busy or _state != MoveState.IDLE:
 		return
 	var anim_name := str(_player.current_animation)
-	if anim_name != _primary_clip and anim_name != IDLE_02:
+	if anim_name != _primary_clip and anim_name != _break_clip:
 		return
 	var pos := _player.current_animation_position
 	if not _arm_wrap:
@@ -82,7 +86,7 @@ func _enter_idle() -> void:
 	_primary_done = 0
 	_break_done = 0
 	_break_target = 0
-	_primary_clip = IDLE_01 if randi() % 2 == 0 else IDLE_03
+	_primary_clip = _PRIMARY_IDLES[randi() % _PRIMARY_IDLES.size()]
 	_play(_primary_clip, IDLE_PLAYBACK, true)
 
 
@@ -94,7 +98,8 @@ func _on_idle_lap() -> void:
 		_phase = IdlePhase.BREAK
 		_break_target = randi_range(1, 3)
 		_break_done = 0
-		_play(IDLE_02, IDLE_PLAYBACK, true)
+		_break_clip = _BREAK_IDLES[randi() % _BREAK_IDLES.size()]
+		_play(_break_clip, IDLE_PLAYBACK, true)
 		return
 	_break_done += 1
 	if _break_done >= _break_target:

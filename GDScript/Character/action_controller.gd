@@ -1,9 +1,11 @@
 extends Node
 ## 熱鍵與 UI 都呼叫 request()。單次動作播完才把 locomotion 交回去。
 
+const BELL_CLIP := "alex_func00_bell"
+const INTERACT_CLIP := "alex_func05_interact"
 const _CLIPS := {
 	1: "alex_func01_call",
-	2: "alex_func02_snap",
+	2: "alex_func02_nuzzling",
 	3: "alex_func03_bark",
 	4: "alex_func04_bite",
 }
@@ -84,12 +86,14 @@ func request(action_id: Variant) -> void:
 		var scan := get_node_or_null("../ScanController")
 		if scan != null and scan.has_method("start_scan"):
 			scan.start_scan()
+		_play_clip(BELL_CLIP, "鈴鐺")
 		return
 	if token == "E":
 		for node in get_tree().get_nodes_in_group("unit"):
 			var api := _unit_api(node)
 			if api != null and api.has_method("try_interact"):
 				api.try_interact()
+		_play_clip(INTERACT_CLIP, "互動")
 		return
 	var action := int(action_id)
 	var clip: String = str(_CLIPS.get(action, ""))
@@ -103,9 +107,12 @@ func request(action_id: Variant) -> void:
 			_notify_called()
 		else:
 			_hit_units(-2)
-	var has_clip := _player.has_animation(clip)
-	if not has_clip:
-		print("ActionController: 沒有 %s（%s），略過動畫" % [clip, _LABELS.get(action, "")])
+	_play_clip(clip, str(_LABELS.get(action, "")))
+
+
+func _play_clip(clip: String, label: String) -> void:
+	if not _player.has_animation(clip):
+		print("ActionController: 沒有 %s（%s），略過動畫" % [clip, label])
 		return
 	if _busy:
 		return

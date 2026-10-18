@@ -4,12 +4,12 @@
 [ext_resource type="Script" uid="uid://dkmetxemrrn1o" path="res://GDScript/Character/human_locomotion.gd" id="2_loco"]
 [ext_resource type="Script" uid="uid://bwbwemq1anwh" path="res://GDScript/Character/human_follow.gd" id="3_ai"]
 
-[node name="Adam" type="CharacterBody3D" unique_id=877454134 groups=["unit"]]
+[node name="Adam" type="CharacterBody3D" groups=["unit"]]
 
-[node name="standardman_panties" parent="." unique_id=1847416270 instance=ExtResource("1_man")]
+[node name="standardman_panties" parent="." instance=ExtResource("1_man")]
 
-[node name="LocomotionAnim" type="Node" parent="." unique_id=1891283612]
+[node name="LocomotionAnim" type="Node" parent="."]
 script = ExtResource("2_loco")
 
-[node name="FollowAI" type="Node" parent="." unique_id=1404447046]
+[node name="FollowAI" type="Node" parent="."]
 script = ExtResource("3_ai")
