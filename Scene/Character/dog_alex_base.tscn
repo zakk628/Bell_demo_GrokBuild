@@ -4,7 +4,7 @@
 
 [node name="dog_alex_base" unique_id=834532284 instance=ExtResource("1_rf8u2")]
 
-[node name="Skeleton3D" parent="metarig" parent_id_path=PackedInt32Array(2001358888) index="0" unique_id=260278329]
+[node name="Skeleton3D" parent="metarig" parent_id_path=PackedInt32Array(636173092) index="0" unique_id=466833121]
 bones/1/rotation = Quaternion(0, -5.5636292e-08, 0, 1)
 bones/2/position = Vector3(-5.2620896e-07, 0.16149238, -0.5383079)
 bones/2/rotation = Quaternion(-0.7071068, 1.15202326e-07, 5.760117e-07, 0.7071068)
@@ -33,6 +33,7 @@ bones/16/position = Vector3(-5.2620896e-07, -0.026915371, -0.5383079)
 bones/16/rotation = Quaternion(-0.7071068, 1.15202326e-07, 5.760117e-07, 0.7071068)
 bones/19/rotation = Quaternion(-0.06259658, -1.1897533e-07, -7.4620825e-09, 0.99803895)
 bones/23/rotation = Quaternion(0.08840107, 3.828198e-05, 1.9535035e-05, 0.99608505)
+bones/24/rotation = Quaternion(-0.5567283, -2.4400222e-05, -3.586785e-05, 0.8306946)
 bones/27/position = Vector3(3.6538988e-06, -0.07693245, 0.10442408)
 bones/27/rotation = Quaternion(0.7488461, -1.580064e-06, -1.4282631e-06, 0.6627439)
 bones/30/rotation = Quaternion(-0.49417365, 0.64280885, 0.49747896, 0.30838925)
@@ -65,8 +66,8 @@ bones/89/rotation = Quaternion(-0.37074697, -1.10713735e-07, -4.4196465e-08, 0.9
 bones/90/rotation = Quaternion(0.15990801, 7.0749964e-15, -1.2183458e-15, 0.9871319)
 bones/91/rotation = Quaternion(0.1492629, 1.0592691e-17, 1.2745556e-17, 0.98879755)
 
-[node name="eye_L" parent="metarig/Skeleton3D" index="0" unique_id=1187910743]
-transform = Transform3D(-0.9999993, -2.7556837e-09, -9.015511e-08, -9.014804e-08, -8.940677e-08, 0.99999946, -2.750312e-09, 0.99999946, 1.7881379e-07, 0.07243698, 0.8796823, 0.6202152)
+[node name="eye_L" parent="metarig/Skeleton3D" index="0" unique_id=1301154603]
+transform = Transform3D(-0.9999993, -2.7484077e-09, -9.016239e-08, -9.0162594e-08, -8.940677e-08, 0.99999946, -2.743036e-09, 0.99999946, 1.7881379e-07, 0.07243698, 0.8796823, 0.6202152)
 
-[node name="eye_R" parent="metarig/Skeleton3D" index="1" unique_id=483441226]
-transform = Transform3D(-0.9999993, -2.7556837e-09, -9.015511e-08, -9.014804e-08, -8.940677e-08, 0.99999946, -2.750312e-09, 0.99999946, 1.7881379e-07, -0.07243698, 0.8796823, 0.6202153)
+[node name="eye_R" parent="metarig/Skeleton3D" index="1" unique_id=296874040]
+transform = Transform3D(-0.9999993, -2.7484077e-09, -9.016239e-08, -9.0162594e-08, -8.940677e-08, 0.99999946, -2.743036e-09, 0.99999946, 1.7881379e-07, -0.07243698, 0.8796823, 0.6202153)
