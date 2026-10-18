@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ccheckpoint8" path="res://Scene/Scene/checkpoint.tscn" id="5_cp"]
 [ext_resource type="PackedScene" path="res://Scene/Character_NPC/John.tscn" id="6_john"]
 [ext_resource type="PackedScene" path="res://Scene/Character_NPC/Adam.tscn" id="7_adam"]
+[ext_resource type="PackedScene" path="res://Scene/Scene/ruin_dressing.tscn" id="8_dress"]
 
 [sub_resource type="Environment" id="Environment_ruin"]
 background_mode = 1
@@ -45,6 +46,8 @@ shadow_enabled = true
 [node name="Floor" type="GridMap" parent="." groups=["ground"]]
 cell_size = Vector3(2, 2, 2)
 
+[node name="RuinDressing" parent="." instance=ExtResource("8_dress")]
+
 [node name="CellFog" type="Node3D" parent="."]
 script = ExtResource("2_fog")
 
@@ -55,12 +58,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.05, -1)
 
 [node name="ruin_01" parent="." instance=ExtResource("5_cp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.5, 0.4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0.5, 3)
 checkpoint_id = "ruin_01"
 
+[node name="ExitMark" type="Label3D" parent="ruin_01"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, 0)
+text = "這層出口"
+font_size = 56
+billboard = 1
+modulate = Color(1, 0.93, 0.55, 1)
+outline_size = 16
+outline_modulate = Color(0.12, 0.09, 0.04, 1)
+
 [node name="John" parent="." instance=ExtResource("6_john")]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -9, 0, 9)
 
 [node name="Adam" parent="." instance=ExtResource("7_adam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -5)
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
