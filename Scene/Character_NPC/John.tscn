@@ -13,3 +13,6 @@ script = ExtResource("2_loco")
 
 [node name="FollowAI" type="Node" parent="."]
 script = ExtResource("3_ai")
+age = "20歲"
+occupation = "無業遊民"
+mental_state = "想要趕快回家"

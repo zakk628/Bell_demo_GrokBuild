@@ -253,7 +253,7 @@ func _show_selection(node: Node) -> void:
 		if ai != null and ai.has_method("selection_info"):
 			info_node = ai
 	if node == null:
-		label.text = ""
+		label.text = "未選取"
 	elif info_node != null and info_node.has_method("selection_info"):
 		label.text = info_node.selection_info()
 	else:

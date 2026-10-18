@@ -8,6 +8,10 @@ const INTERACT_DISTANCE := 3.0
 const FEAR_SPEED := 1.4
 const FOLLOW_SPEED := 3.0
 
+@export var age := ""
+@export var occupation := ""
+@export var mental_state := ""
+
 var friendliness := 0
 var _eyes: Array[MeshInstance3D] = []
 var _prompt: Label3D
@@ -42,7 +46,9 @@ func _ready() -> void:
 
 
 func selection_info() -> String:
-	return "姓名：%s\n狀態：%s\n友善值：%d" % [name, mood_name(), friendliness]
+	return "姓名：%s\n年齡：%s\n職業：%s\n狀態：%s\n友善值：%d\n心理狀態：%s" % [
+		name, age, occupation, mood_name(), friendliness, mental_state
+	]
 
 
 func mood_name() -> String:

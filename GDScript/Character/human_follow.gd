@@ -14,6 +14,9 @@ const STOP_PADDING := 2.0
 @export var sprint_enter_distance := 10.0
 @export var sprint_exit_distance := 7.0
 @export var turn_speed := 8.0
+@export var age := ""
+@export var occupation := ""
+@export var mental_state := ""
 
 var friendliness := 0
 var _called := false
@@ -37,7 +40,10 @@ func _ready() -> void:
 
 
 func selection_info() -> String:
-	return "姓名：%s\n狀態：%s\n友善值：%d" % [_body.name, mood_name(), friendliness]
+	var unit_name := _body.name if _body != null else name
+	return "姓名：%s\n年齡：%s\n職業：%s\n狀態：%s\n友善值：%d\n心理狀態：%s" % [
+		unit_name, age, occupation, mood_name(), friendliness, mental_state
+	]
 
 
 func mood_name() -> String:
