@@ -217,7 +217,11 @@ func _select_click(screen_pos: Vector2) -> void:
 	var selected: Node = null
 	if not hit.is_empty():
 		selected = _find_grouped(hit.collider as Node, ["unit", "item"])
-	_show_selection(selected)
+	select_unit(selected)
+
+
+func select_unit(node: Node) -> void:
+	_show_selection(node)
 
 
 func _raycast(screen_pos: Vector2) -> Dictionary:
@@ -244,6 +248,7 @@ func refresh_selection() -> void:
 
 func _show_selection(node: Node) -> void:
 	selected_unit = node
+	_sync_portrait_highlight()
 	var label := get_tree().get_first_node_in_group("selection_label") as Label
 	if label == null:
 		return
@@ -260,3 +265,10 @@ func _show_selection(node: Node) -> void:
 		label.text = info_node.selection_info()
 	else:
 		label.text = "選取：%s" % node.name
+
+
+func _sync_portrait_highlight() -> void:
+	var portraits: Array[Node] = get_tree().get_nodes_in_group("follow_portraits")
+	for portrait in portraits:
+		if portrait.has_method("sync_selection"):
+			portrait.call("sync_selection")
