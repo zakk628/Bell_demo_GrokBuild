@@ -148,7 +148,9 @@ func _followers() -> Array[Node3D]:
 		var body := node as Node3D
 		var api: Node = body
 		if not body.has_method("is_following"):
-			var ai := body.get_node_or_null("FollowAI")
+			var ai := body.get_node_or_null("Status_Control")
+			if ai == null:
+				ai = body.get_node_or_null("FollowAI")
 			if ai != null:
 				api = ai
 		if api.has_method("is_following") and bool(api.call("is_following")):

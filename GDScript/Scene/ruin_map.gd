@@ -10,6 +10,8 @@ const CENTER_CELL := Vector2i(-1, -1)
 const FOLLOWER_CELL := Vector2i(3, -1)
 const JOHN_CELL := Vector2i(-5, 4)
 const ADAM_CELL := Vector2i(2, -3)
+const MASTER_CELL := Vector2i(-4, -4)
+const BUDDHA_CELL := Vector2i(-2, 2)
 const EXIT_CELL := Vector2i(6, 1)
 const WALL_BELOW := 0.4
 const WALL_TEXTURE := "res://Assets/Floor/export_floor_a_floor_A.jpg"
@@ -207,6 +209,8 @@ func _place_actors() -> void:
 		marker.position = Vector3(mark_at.x, walk_surface_y + 0.5, mark_at.z)
 	_place_on_floor("John", JOHN_CELL)
 	_place_on_floor("Adam", ADAM_CELL)
+	_place_on_floor("Latern_Master", MASTER_CELL)
+	_place_on_floor("Latern_Buddha", BUDDHA_CELL)
 
 
 func _place_on_floor(node_name: String, cell: Vector2i) -> void:

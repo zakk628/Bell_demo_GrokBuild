@@ -1,18 +1,29 @@
-[gd_scene format=3 uid="uid://cjohnhuman01"]
+[gd_scene format=3 uid="uid://d3gukh36h07xx"]
 
-[ext_resource type="PackedScene" uid="uid://cb85k3oy60teu" path="res://Scene/Character/standardman_scifi.tscn" id="1_man"]
-[ext_resource type="Script" uid="uid://dkmetxemrrn1o" path="res://GDScript/Character/human_locomotion.gd" id="2_loco"]
-[ext_resource type="Script" uid="uid://bwbwemq1anwh" path="res://GDScript/Character/human_follow.gd" id="3_ai"]
+[ext_resource type="PackedScene" uid="uid://b123fqmtdxeum" path="res://Scene/Character/standardman_scifi_base.tscn" id="1_4iptd"]
+[ext_resource type="Script" path="res://GDScript/Character/anime_control.gd" id="2_anime"]
+[ext_resource type="Script" path="res://GDScript/Character/move_control.gd" id="3_move"]
+[ext_resource type="Script" path="res://GDScript/Character/status_control.gd" id="4_status"]
 
-[node name="John" type="CharacterBody3D" groups=["unit"]]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_1k1ps"]
+height = 1.8
+radius = 0.35
 
-[node name="standardman_panties" parent="." instance=ExtResource("1_man")]
+[node name="John" type="CharacterBody3D" unique_id=1106661385]
 
-[node name="LocomotionAnim" type="Node" parent="."]
-script = ExtResource("2_loco")
+[node name="standardman_panties" parent="." unique_id=1412880778 instance=ExtResource("1_4iptd")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 
-[node name="FollowAI" type="Node" parent="."]
-script = ExtResource("3_ai")
-age = "20歲"
-occupation = "無業遊民"
-mental_state = "想要趕快回家"
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=670754157]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CylinderShape3D_1k1ps")
+
+[node name="Anime_Control" type="Node" parent="."]
+script = ExtResource("2_anime")
+
+[node name="Move_Control" type="Node" parent="."]
+script = ExtResource("3_move")
+
+[node name="Status_Control" type="Node" parent="."]
+script = ExtResource("4_status")
+display_name = "John"

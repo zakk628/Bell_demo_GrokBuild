@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" path="res://Scene/Character_NPC/John.tscn" id="6_john"]
 [ext_resource type="PackedScene" path="res://Scene/Character_NPC/Adam.tscn" id="7_adam"]
 [ext_resource type="PackedScene" path="res://Scene/Scene/ruin_dressing.tscn" id="8_dress"]
+[ext_resource type="PackedScene" path="res://Scene/Character_NPC/Latern_Master.tscn" id="9_master"]
+[ext_resource type="PackedScene" path="res://Scene/Character_NPC/Latern_Buddha.tscn" id="10_buddha"]
 
 [sub_resource type="Environment" id="Environment_ruin"]
 background_mode = 1
@@ -75,6 +77,12 @@ transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -9, 0, 9)
 
 [node name="Adam" parent="." instance=ExtResource("7_adam")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -5)
+
+[node name="Latern_Master" parent="." instance=ExtResource("9_master")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -7)
+
+[node name="Latern_Buddha" parent="." instance=ExtResource("10_buddha")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 5)
 
 [node name="HUD" type="CanvasLayer" parent="."]
 

@@ -249,7 +249,9 @@ func _show_selection(node: Node) -> void:
 		return
 	var info_node := node
 	if node != null and not node.has_method("selection_info"):
-		var ai := node.get_node_or_null("FollowAI")
+		var ai := node.get_node_or_null("Status_Control")
+		if ai == null:
+			ai = node.get_node_or_null("FollowAI")
 		if ai != null and ai.has_method("selection_info"):
 			info_node = ai
 	if node == null:

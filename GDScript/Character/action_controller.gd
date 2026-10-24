@@ -195,6 +195,9 @@ func _flat_facing(dog: Node3D) -> Vector3:
 func _unit_api(node: Node) -> Node:
 	if node.has_method("apply_friendship") or node.has_method("on_dog_call") or node.has_method("try_interact"):
 		return node
+	var status := node.get_node_or_null("Status_Control")
+	if status != null:
+		return status
 	return node.get_node_or_null("FollowAI")
 
 
